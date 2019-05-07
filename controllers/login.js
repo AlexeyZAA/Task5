@@ -6,17 +6,15 @@
 'use strict';
 const views = require('co-views');
 const parse = require('co-body');
-const loginobject = [
-  { id: 0,
-    titlelogin: 'Залогинься',
-    messagelogin: 'Войдите в систему'
-  },
-];
+const titlelogin = 'Необходимо войти на сайт';
+const titlemessage = 'Авторизируйтесь на сайте, введите логин и пароль';
+
 const render = views(__dirname + '/../views', {
   map: { html: 'swig' }
 });
 
 module.exports.login = function *login(ctx) {
-  this.body = yield render('login', { 'loginobject': loginobject });
+  this.body = yield render('login', {'titlelogin': titlelogin, 'titlemessage': titlemessage });
 };
+
 

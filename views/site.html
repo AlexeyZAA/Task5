@@ -9,7 +9,7 @@
     {% endfor %}
   </ul>
   <form action="/messages" method="post" id="message-form">
-    <textarea placeholder="Insert a message" name="message"
-      onkeydown="if (event.keyCode == 13) document.getElementById('message-form').submit();"></textarea>
+    <input type='text' placeholder="Отправтье сообщение" name="message">
+    <input type='submit' value='Отправить'>
   </form>
 {% endblock %}

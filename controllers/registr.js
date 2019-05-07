@@ -6,17 +6,13 @@
 'use strict';
 const views = require('co-views');
 const parse = require('co-body');
-const registrobject = [
-  { id: 0,
-    titleregistr: 'Регистрация',
-    messageregistr: 'Для того чтобы посмотреть пользователей необходима регистрация'
-  },
-];
+const titlereg = 'Страница регистрации';
+const messagereg = 'Вам необходимо зарегистрироваться на сайте';
 const render = views(__dirname + '/../views', {
   map: { html: 'swig' }
 });
 
 module.exports.registr = function *registr(ctx) {
-  this.body = yield render('registr', { 'registrobject': registrobject });
+  this.body = yield render('registr', { 'titlereg': titlereg , 'messagereg': messagereg });
 };
 

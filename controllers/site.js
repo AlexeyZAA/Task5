@@ -16,7 +16,7 @@ const render = views(__dirname + '/../views', {
 });
 
 module.exports.home = function *home(ctx) {
-  this.body = yield render('list', { 'messages': messages });
+  this.body = yield render('site', { 'messages': messages });
 };
 
 module.exports.list = function *list() {

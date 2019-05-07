@@ -1,12 +1,13 @@
 'use strict';
 const views = require('co-views');
 const parse = require('co-body');
+//массив сообщений
 const messages = [
   { id: 0,
-    message: 'Koa next generation web framework for node.js'
+    message: 'Приветствуем вас наши посетители'
   },
   { id: 1,
-    message: 'Koa is a new web framework designed by the team behind Express'
+    message: 'Описание приложения'
   }
 ];
 

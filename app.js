@@ -1,5 +1,9 @@
 'use strict';
 const messages = require('./controllers/messages');
+const login = require('./controllers/login');
+const registr = require('./controllers/registr');
+const userlist = require('./controllers/userlist');
+
 const compress = require('koa-compress');
 const logger = require('koa-logger');
 const serve = require('koa-static');
@@ -12,6 +16,10 @@ const app = module.exports = koa();
 app.use(logger());
 
 app.use(route.get('/', messages.home));
+app.use(route.get('/login', login.login));
+app.use(route.get('/registr', registr.registr));
+app.use(route.get('/userlist', userlist.userlist));
+
 app.use(route.get('/messages', messages.list));
 app.use(route.get('/messages/:id', messages.fetch));
 app.use(route.post('/messages', messages.create));
@@ -26,5 +34,5 @@ app.use(compress());
 
 if (!module.parent) {
   app.listen(3000);
-  console.log('listening on port 3000');
+  console.log('Слушаем порт 3000');
 }

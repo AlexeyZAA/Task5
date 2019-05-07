@@ -6,8 +6,7 @@ const userlist = require('./controllers/userlist');
 //аутентификация
 const auth = require('koa-basic-auth');
 
-
-
+    
 const compress = require('koa-compress');
 const logger = require('koa-logger');
 const serve = require('koa-static');

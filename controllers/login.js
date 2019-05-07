@@ -17,4 +17,3 @@ module.exports.login = function *login(ctx) {
   this.body = yield render('login', {'titlelogin': titlelogin, 'titlemessage': titlemessage });
 };
 
-

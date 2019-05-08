@@ -3,14 +3,11 @@
 {% block title %}{{ titleusers }}{% endblock %}
 
 {% block content %}
-  <ul class="users">
-    {% for user in userlistobject %}
-      <li class="message">{{ user.username }}</li>
-    {% endfor %}
-  </ul>
 <p>
 <ul class="usersall">
-    <h1>{{users['2']}}</h1>
+    <script type="text/javascript">
+    console.log('ddd');
+    </script>
     {% for user in users %}
       <li class="message">{{ user }}</li>
     {% endfor %}

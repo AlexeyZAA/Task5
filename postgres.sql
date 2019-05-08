@@ -1,12 +1,4 @@
-﻿-- SQL Manager Lite for PostgreSQL 5.9.5.52424
--- ---------------------------------------
--- Хост         : 127.0.0.1:7777
--- База данных  : postgres
--- Версия       : PostgreSQL 11.2, compiled by Visual C++ build 1800, 32-bit
-
-
-
-SET check_function_bodies = false;
+﻿SET check_function_bodies = false;
 --
 -- Structure for table users (OID = 16395) : 
 --

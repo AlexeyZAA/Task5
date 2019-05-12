@@ -1,10 +1,31 @@
-{% extends 'layout.html' %}
-
+{% extends 'laypage.html' %}
 {% block title %}{{ titlereg }}{% endblock %}
-
 {% block content %}
   <div class="">
       <span>{{ messagereg }}</span>
   </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            <div>{{titlemessage}}</div>
+            <form action="/registr">
+                <div class="form-group">
+                    <label for="inputEmail">Логин:</label>
+                    <input type="email" class="form-control" id=regLogin" placeholder="Введите логин">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Пароль:</label>
+                    <input type="password" class="form-control" id="regPassword" placeholder="Введите пароль">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Пароль:</label>
+                    <input type="password" class="form-control" id="regPasswordConf" placeholder="Подтвердите пароль">
+                </div>
+                <button type="submit" class="btn btn-primary">Регистрация</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
-}
+
+

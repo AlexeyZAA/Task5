@@ -1,13 +1,11 @@
-{% extends 'layout.html' %}
+{% extends 'laypage.html' %}
 
 {% block title %}{{ titleusers }}{% endblock %}
 
 {% block content %}
 <p>
+   джисон users - {{users}}
 <ul class="usersall">
-    <script type="text/javascript">
-    console.log('ddd');
-    </script>
     {% for user in users %}
       <li class="message">{{ user }}</li>
     {% endfor %}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Приложение Koa2.js</title>
+        <link  href="http://fonts.googleapis.com/css?family=Oswald:regular" rel="stylesheet" type="text/css" >
+        <link href='http://fonts.googleapis.com/css?family=Junge' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+        <header class="clearfix">
+            <div class="container">
+                <a id="logo" href="/">Приложение Koa.js</a>
+                <ul class="social-icons">
+                    <li><a href="/login" class="icon flip">Вход</a></li>
+                    <li><a href="/registr" class="icon">Регистрация</a></li>
+                </ul>
+                <nav class="clearfix">
+                    <ul role="navigation">
+                        <li>
+                            <a href="/" class="activePage">Главная</a>
+                        </li>
+                        <li>
+                            <a href="/userlist">Пользователи</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section role="banner">
+            <hgroup>
+                <h1>Тут будет приветствие</h1>
+                <h2>Привет привет привет привет.</h2>
+            </hgroup>
+        </section> <!-- // banner ends -->
+        {% block content %}
+        <p>Содержимое контента?</p>
+        {% endblock %}
+        <footer role="contentinfo">
+            <p>
+                <span class="left">Тестовое задание 5 &copy; - 2019 </span>
+                <a href="/">Главная</a> | <a href="/userlist">Пользователи</a> | <a href="/login">Вход</a> | <a href="/registr">Регистрация</a>
+            </p>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="assets/js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    </body>
+</html>

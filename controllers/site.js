@@ -4,13 +4,13 @@ const parse = require('co-body');
 //массив сообщений
 const messages = [
   { id: 0,
-    message: 'Приветствуем вас наши посетители'
+    message: ''
   },
   { id: 1,
-    message: 'Описание приложения'
+    message: ''
   }
 ];
-
+const hellouser = '';
 const render = views(__dirname + '/../views', {
   map: { html: 'swig' }
 });

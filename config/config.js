@@ -7,7 +7,7 @@ var config = {
   db:{
     host:"127.0.0.1:7777",
     database:"postgress",
-    username:"postgress",
+    username:"root",
     password:"1"
   },
 }

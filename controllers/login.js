@@ -15,6 +15,7 @@ const render = views(__dirname + '/../views', {
 });
 //рендерим вид логин передаем ему данные
 module.exports.login = function *login(ctx) {
+  console.log(ctx.request);
   this.body = yield render('login', {'titlelogin': titlelogin, 'titlemessage': titlemessage });
 };
 

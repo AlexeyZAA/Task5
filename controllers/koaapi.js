@@ -34,12 +34,13 @@ var pool = new Pool({
     password: '1',
     port: 7777
 });
+
 const api = {
-    api1: function *api1(ctx) {
-        this.body = yield render('koaapi', {'apimessage1': JSON.stringify(apimessage1)});
+    getAll: function *getAll(){
+        return 'query(`SELECT * from ${tableName}`)';
     },
     api2: function *api2(ctx) {
-        this.body = yield render('koaapi', {'apimessage1': JSON.stringify(apimessage2)});
+        this.body = yield render('koaapi', {'apimessage1': JSON.stringify('apimessage2')});
     },
     userall: function *userall(ctx) {
         pool.query('SELECT NOW()', (err, res) => {

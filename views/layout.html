@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
         <link rel="stylesheet" href="assets/css/main.css">
+        <script src="scripts/vue.js"></script>
     </head>
     <body>
         <header class="clearfix">
@@ -32,7 +33,9 @@
         <section role="banner">
             <hgroup>
                 <h1>Тут будет приветствие</h1>
-                <h2>Привет привет привет привет.</h2>
+                <div id="hello"> 
+                    {{message}} 
+                </div>
             </hgroup>
             <article role="main" class="clearfix">
                 <div class="post">
@@ -104,8 +107,7 @@
                 <a href="/">Главная</a> | <a href="/userlist">Пользователи</a> | <a href="/login">Вход</a> | <a href="/registr">Регистрация</a>
             </p>
         </footer>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="assets/js/script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <script src="scripts/script.js"></script>
+        <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
     </body>
 </html>

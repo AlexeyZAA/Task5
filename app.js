@@ -2,15 +2,16 @@
 const site = require('./controllers/site');
 const login = require('./controllers/login');
 const registr = require('./controllers/registr');
-const userlist = require('./controllers/userlist');
 const koaapi = require('./controllers/koaapi');
 const users = require('./models/users');
+const userlist = require('./controllers/userlist');
+
 
 const compress = require('koa-compress');
 const logger = require('koa-logger');
 const serve = require('koa-static');
 const route = require('koa-route');
-const Router = require('koa-router');
+const router = require('koa-router');
 const convert = require('koa-convert');
 const KoaBody = require('koa-body');
 
@@ -21,16 +22,24 @@ const app = module.exports = new koa();
 
 app.use(logger());
 
+app.use(serve(path.join(__dirname, 'public')));
+app.use(route.get('/apiall', async (ctx, next) => {
+    ctx.body = await koaapi.api.getAll();
+}));
+
+//app.use(route.get('/api1', async (ctx, next) => {
+//            ctx.body = await koaapi.api.api1;
+//        }));
 app.use(route.get('/', site.home));
 app.use(route.get('/login', login.login));
 app.use(route.get('/registr', registr.registr));
-app.use(route.get('/api1', koaapi.api.api1));
+//app.use(route.get('/api1', koaapi.api.api1));
 app.use(route.get('/api2', koaapi.api.api2));
-var test = userlist.users();
-console.log(test);
-app.use(route.get('/userlist', ''));  
-
-app.use(serve(path.join(__dirname, 'public')));
+//app.use(route.get('/users', users.Users.userslist));
+app.use(route.get('/users', async (ctx, next) => {
+    ctx.body = await users.Users.userslist;
+}));
+//app.use(route.get('/userlist', userlist.userlist()));  
 
 // Compress
 app.use(compress());

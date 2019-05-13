@@ -9,21 +9,25 @@ const views = require('co-views');
 const render = views(__dirname + '/../views', {
     map: {html: 'swig'}
 });
-//var pool = new Pool({
-//    user: 'root',
-//    host: '127.0.0.1',
-//    database: 'postgres',
-//    password: '1',
-//    port: 7777
-//});
-const client = new Pool({
-    user: 'root',
-    host: 'localhost',
-    database: 'postgres',
-    password: '1',
-    port: 7777
-});
-//const userlist = {
+
+const Users = {
+    userslist : async () => {
+    const {Client} = require('pg');
+    const client = new Client({
+        user: 'postgress',
+        host: '127.0.0.1',
+        database: 'postgres',
+        password: '1',
+        port: 5432
+    });
+    await client.connect();
+    const res = await client.query('SELECT * from users');
+    user = res.rows[0].user_name;
+    console.log(user);
+    await client.end();
+    return user;
+    //ctx.body = user;//await render('userlist', {'users': user });
+}
 //    userall: function *userall(ctx) {
 //            client.connect();
 //            client.query('SELECT * from users', (err, res) => {
@@ -40,17 +44,7 @@ const client = new Pool({
 //        //return 'sssssss';
 //    }
 //}
-var q;
-var users = function () {
-    client.connect();
-    client.query('SELECT * from users', (err, res) => {
-        console.log(JSON.stringify(res[0]));
-        if (err)
-            throw err;
-        q = JSON.stringify(res[0]);
-    });
+    
 };
 
-//module.exports.userlist = userlist;
-module.exports.q = q;
-module.exports.users = users;
+module.exports.Users = Users;

@@ -20,17 +20,11 @@ const Koa = require('koa');
 const koaapi = require('./controllers/koaapi');
 const router = require('koa-router')();
 const app = new Koa();
-
-router.get('/api', api);
+//определяем маршруты
+router.get('/api', koaapi.api);
+//*закончили определять
+//подключаем маршруты к приложению
 app.use(router.routes());
-// response в таком виде работает
-//app.use(ctx => {
-//  ctx.body = 'Hello Koa';
-//});
-async function api(ctx) {
-  ctx.body = 'Hello Koa';
-}
-
 
 app.listen(3000);
 

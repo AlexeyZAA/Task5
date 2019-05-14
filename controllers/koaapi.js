@@ -15,6 +15,9 @@ const api = {
     },
     api2: async function api2(ctx) {
         ctx.body = await HelloArr;
+    },
+    api3: async function api3(ctx) {
+        ctx.body = await ctx.params;
     }
 }
 

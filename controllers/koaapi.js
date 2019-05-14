@@ -11,9 +11,6 @@ const isJson = require('koa-is-json');
 
 
 const api = {
-    getAll: function *getAll(){
-        return 'query(`SELECT * from ${tableName}`)';
-    },
     api2: function *api2(ctx) {
         this.body = yield render('koaapi', {'apimessage1': JSON.stringify('apimessage2')});
     },
@@ -24,7 +21,6 @@ const api = {
             pool.end();
         });
         this.body =  'is a ';
-        //render('userlist', {'users': JSON.stringify(apimessage2)});
     }
 };
 

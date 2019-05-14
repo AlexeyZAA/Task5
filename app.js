@@ -27,21 +27,10 @@ app.use(route.get('/apiall', async (ctx, next) => {
     ctx.body = await koaapi.api.getAll();
 }));
 
-//app.use(route.get('/api1', async (ctx, next) => {
-//            ctx.body = await koaapi.api.api1;
-//        }));
 app.use(route.get('/', site.home));
 app.use(route.get('/login', login.login));
 app.use(route.get('/registr', registr.registr));
-//app.use(route.get('/api1', koaapi.api.api1));
 app.use(route.get('/api2', koaapi.api.api2));
-//app.use(route.get('/users', users.Users.userslist));
-app.use(route.get('/users', async (ctx, next) => {
-    ctx.body = await users.Users.userslist;
-}));
-//app.use(route.get('/userlist', userlist.userlist()));  
-
-// Compress
 app.use(compress());
 
 if (!module.parent) {

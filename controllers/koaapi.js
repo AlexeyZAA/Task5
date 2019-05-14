@@ -19,9 +19,14 @@ const isJson = require('koa-is-json');
 //    }
 //};
 let HelloObj = {'hello': 'Привет Ноде'};
-    
-async function api(ctx) {
-  ctx.body = HelloObj;
+let HelloArr = ['Иванов', 'Петров'];    
+let api1 = async function api1(ctx) {
+  ctx.body = await HelloObj;
 }
 
-module.exports.api = api;
+let api2 = async function api2(ctx) {
+  ctx.body = await HelloArr;
+}
+
+module.exports.api1 = api1;
+module.exports.api2 = api2;

@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 'use strict';
-//подключаем модули
-//const views = require('co-views');
-//const parse = require('co-body');
-//const isJson = require('koa-is-json');
+const isJson = require('koa-is-json');
 //const api = {
 //    api2: function *api2(ctx) {
 //        this.body = yield render('koaapi', {'apimessage1': JSON.stringify('apimessage2')});
@@ -21,9 +18,10 @@
 //        this.body =  'is a ';
 //    }
 //};
-
+let HelloObj = {'hello': 'Привет Ноде'};
+    
 async function api(ctx) {
-  ctx.body = 'Hello Koa';
+  ctx.body = HelloObj;
 }
 
 module.exports.api = api;

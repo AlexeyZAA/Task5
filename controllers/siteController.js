@@ -1,16 +1,17 @@
 'use strict';
-const Vue = require('vue')
-const app = new Vue({
-    template: '<div>Hello World</div>'
+const Vue = require('vue');
+const app = new Vue();
+const views = require('co-views');
+//const app = new Vue({
+////    template: '<div>Hello World</div>'
+//});
+const renderer = require('vue-server-renderer').createRenderer({
+    template: require('fs').readFileSync(__dirname + '/../views/site.template.html', 'utf-8')
 });
-const renderer = require('vue-server-renderer').createRenderer();
-//шаблоны видов в папке вью
+
 async function index(ctx) {
-    renderer.renderToString(app).then(html => {
-        ctx.body = html;
-        ///console.log(html)
-    }).catch(err => {
-        console.error(err)
+    renderer.renderToString(app, (err, html) => {
+        console.log(html) // will be the full page with app content injected.
     });
 }
 module.exports.index = index;

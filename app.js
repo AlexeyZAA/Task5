@@ -21,8 +21,8 @@ const koaapi = require('./controllers/koaapi');
 const router = require('koa-router')();
 const app = new Koa();
 //определяем маршруты
-router.get('/api1', koaapi.api1);
-router.get('/api2', koaapi.api2);
+router.get('/api1', koaapi.api.api1);
+router.get('/api2', koaapi.api.api2);
 //*закончили определять
 //подключаем маршруты к приложению
 app.use(router.routes());

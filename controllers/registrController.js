@@ -4,9 +4,9 @@ const ex= express();
 ex.set("view engine", "ejs");
 //выполняем рендер шаблона с передачей параметров
 const user = {
-  message: 'Сообщение'
+  message: 'Регистрация'
 };
-async function index(ctx) {
-  await ctx.render('site', { user });
+async function registr(ctx) {
+  await ctx.render('login', { user });
 };
-module.exports.index = index;
+module.exports.registr = registr;

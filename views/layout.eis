@@ -13,7 +13,7 @@
     <body>
         <header class="clearfix">
             <div class="container">
-                <h1>{{ title }}</h1>
+                <h1>ghgjghj</h1>
                 <a id="logo" href="/">Приложение Koa.js</a>
                 <ul class="social-icons">
                     <li><a href="/login" class="icon flip">Вход</a></li>
@@ -35,16 +35,14 @@
             <hgroup>
                 <h1>Тут будет приветствие</h1>
                 <div id="hello"> 
-                    {{message}} 
+hhhhhhhhhhhhhhhhhhh
                 </div>
             </hgroup>
             <article role="main" class="clearfix">
                 <div class="post">
                     <div>
                         <section id='content'>
-                            {% block content %}
                             <p>Содержимое контента?</p>
-                            {% endblock %}
                         </section>
                     </div>
                     <h2>It Fits: an HTML5/CSS3 Responsive template</h2>

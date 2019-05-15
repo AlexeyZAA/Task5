@@ -2,18 +2,19 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{{ title }}</title>
+        <title>Приложение Koa2.js</title>
         <link  href="http://fonts.googleapis.com/css?family=Oswald:regular" rel="stylesheet" type="text/css" >
         <link href='http://fonts.googleapis.com/css?family=Junge' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
         <link rel="stylesheet" href="assets/css/main.css">
-        <!--script src="scripts/vue.js"></script-->
+        <script src="scripts/vue.js"></script>
     </head>
     <body>
         <header class="clearfix">
             <div class="container">
-                <a id="logo" href="/">{{ logoname }}</a>
+                <h1><%=user.message %></h1>
+                <a id="logo" href="/">Приложение Koa.js</a>
                 <ul class="social-icons">
                     <li><a href="/login" class="icon flip">Вход</a></li>
                     <li><a href="/registr" class="icon">Регистрация</a></li>
@@ -24,7 +25,7 @@
                             <a href="/" class="activePage">Главная</a>
                         </li>
                         <li>
-                            <a href="/userlist">Пользователи</a>
+                            <a href="/users">Пользователи</a>
                         </li>
                     </ul>
                 </nav>
@@ -32,19 +33,16 @@
         </header>
         <section role="banner">
             <hgroup>
-                <h1>{{ titlemessage }}</h1>
+                <h1>Тут будет приветствие</h1>
                 <div id="hello"> 
-                    {{ message }}
                 </div>
             </hgroup>
             <article role="main" class="clearfix">
                 <div class="post">
                     <div>
-                        <!--section id='content'>
-                            {% block content %}
+                        <section id='content'>
                             <p>Содержимое контента?</p>
-                            {% endblock %}
-                        </section-->
+                        </section>
                     </div>
                     <h2>It Fits: an HTML5/CSS3 Responsive template</h2>
                     <p>Nunc porta, mauris sit amet laoreet vestibulum, elit leo iaculis lorem, mattis euismod eros lorem sed est. Donec porttitor augue vel nisl blandit gravida. Etiam eu purus non enim vehicula ultrices a non neque.</p>

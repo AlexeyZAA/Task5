@@ -12,11 +12,11 @@ const client = new Client({
     port: 7777
 });
 //получаем данные из базы
-async function userslist(ctx) {
+async function users(ctx) {
         client.connect();
         let r = await client.query('SELECT * from users');
         ctx.body = r.rows;
         client.end();
     }
 
-module.exports.userslist = userslist;
+module.exports.users = users;

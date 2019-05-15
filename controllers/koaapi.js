@@ -9,7 +9,7 @@ const isJson = require('koa-is-json');
 let HelloObj = {'hello': 'Привет Ноде'};
 let HelloArr = ['Иванов', 'Петров'];
 //объект с функциями АПИ возвращающими разные данные
-const api = {
+const Api = {
     api1: async function api1(ctx) {
         ctx.body = await HelloObj;
     },
@@ -21,4 +21,4 @@ const api = {
     }
 }
 
-module.exports.api = api;
+module.exports.Api = Api;

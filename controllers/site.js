@@ -1,25 +1,18 @@
 'use strict';
 //подключаем модули
-const views = require('co-views');
-const parse = require('co-body');
-const {Client} = require('pg');
-//параемтры подключения к базе надо вынести в модуль config
-const client = new Client({
-    user: 'root',
-    host: '127.0.0.1',
-    database: 'postgres',
-    password: '1',
-    port: 7777
-});
 //получаем данные из базы
-async function index(ctx) {
-        client.connect();
-        let r = await client.query('SELECT * from users');
-        ctx.body = r.rows;
-        client.end();
-    }
+async function layout (req, res){
+  res.render('layout', { title: 'ejs' });
+};
 
-module.exports.index = index;
+//async function index(ctx) {
+//        client.connect();
+//        let r = await client.query('SELECT * from users');
+//        ctx.body = r.rows;
+//        client.end();
+//    }
+
+module.exports.layout = layout;
 ////'use strict';
 //const views = require('co-views');
 //const parse = require('co-body');

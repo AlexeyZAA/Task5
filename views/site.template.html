@@ -1,16 +1,113 @@
-{% extends 'layout.html' %}
-
-{% block title %}Форма отправки{% endblock %}
-
-{% block content %}
-<div>{{ title }}</div>
-  <ul class="messages">
-    {% for message in messages %}
-      <li class="message">{{ message.message }}</li>
-    {% endfor %}
-  </ul>
-  <form action="/messages" method="post" id="message-form">
-    <input type='text' placeholder="Отправтье сообщение" name="message">
-    <input type='submit' value='Отправить'>
-  </form>
-{% endblock %}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ title }}</title>
+        <link  href="http://fonts.googleapis.com/css?family=Oswald:regular" rel="stylesheet" type="text/css" >
+        <link href='http://fonts.googleapis.com/css?family=Junge' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <!--script src="scripts/vue.js"></script-->
+    </head>
+    <body>
+        <header class="clearfix">
+            <div class="container">
+                <a id="logo" href="/">{{ logoname }}</a>
+                <ul class="social-icons">
+                    <li><a href="/login" class="icon flip">Вход</a></li>
+                    <li><a href="/registr" class="icon">Регистрация</a></li>
+                </ul>
+                <nav class="clearfix">
+                    <ul role="navigation">
+                        <li>
+                            <a href="/" class="activePage">Главная</a>
+                        </li>
+                        <li>
+                            <a href="/userlist">Пользователи</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section role="banner">
+            <hgroup>
+                <h1>{{ titlemessage }}</h1>
+                <div id="hello"> 
+                    {{ message }}
+                </div>
+            </hgroup>
+            <article role="main" class="clearfix">
+                <div class="post">
+                    <div>
+                        <!--section id='content'>
+                            {% block content %}
+                            <p>Содержимое контента?</p>
+                            {% endblock %}
+                        </section-->
+                    </div>
+                    <h2>It Fits: an HTML5/CSS3 Responsive template</h2>
+                    <p>Nunc porta, mauris sit amet laoreet vestibulum, elit leo iaculis lorem, mattis euismod eros lorem sed est. Donec porttitor augue vel nisl blandit gravida. Etiam eu purus non enim vehicula ultrices a non neque.</p>
+                    <p>Morbi purus odio, faucibus sit amet elementum in:</p>
+                    <ul>
+                        <li>interdum eu ipsum.</li>
+                        <li>Donec cursus pellentesque mauris vitae ultricies.</li>
+                        <li>Donec lacinia nunc in nisl hendrerit scelerisque.</li>
+                    </ul>
+                    <a href="page.html" class="button left">Learn more <span class="icon">:</span></a>
+                </div>
+                <aside role="complementary">
+                    <a href="#demo-url"><img src="http://lorempixel.com/420/290/nature/" alt="Lorem ipsum dolor..."></a>
+                </aside>
+            </article>
+        </section> <!-- // banner ends -->
+        <section class="container">
+            <div class="columns">
+                <article>
+                    <figure>
+                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor...">
+                        <figcaption>
+                            <h3>Micro-formatted HTML5</h3>
+                            <p>Pellentesque mi arcu, sollicitudin vel malesu, <a href="#">volutpat vitae nisi.</a> Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                        </figcaption>
+                    </figure>
+                </article>
+                <article>
+                    <figure>
+                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor..." class="alt-col">
+                        <figcaption>
+                            <h3>Responsive</h3>
+                            <p>Pellentesque mi arcu, sollicitudin vel malesu, volutpat vitae nisi. Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                        </figcaption>
+                    </figure>
+                </article>
+                <article>
+                    <figure>
+                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor...">
+                        <figcaption>
+                            <h3>Pure CSS3</h3>
+                            <p>Pellentesque mi arcu, sollicitudin vel malesu, <strong>volutpat vitae nisi. Nulla luctus</strong> lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                        </figcaption>
+                    </figure>
+                </article>
+                <article>
+                    <figure>
+                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor..." class="alt-col">
+                        <figcaption>
+                            <h3>Browser compatible</h3>
+                            <p>Pellentesque mi arcu, sollicitudin vel malesu, volutpat vitae nisi. Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
+                        </figcaption>
+                    </figure>
+                </article>
+            </div> 
+        </section>
+        <footer role="contentinfo">
+            <p>
+                <span class="left">Тестовое задание 5 &copy; - 2019 </span>
+                <a href="/">Главная</a> | <a href="/userlist">Пользователи</a> | <a href="/login">Вход</a> | <a href="/registr">Регистрация</a>
+            </p>
+        </footer>
+        <script src="scripts/script.js"></script>
+        <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
+    </body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Приложение Koa2.js</title>
+        <link  href="http://fonts.googleapis.com/css?family=Oswald:regular" rel="stylesheet" type="text/css" >
+        <link href='http://fonts.googleapis.com/css?family=Junge' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <script src="//unpkg.com/vue/dist/vue.js"></script>
+        <script src="//unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+    </head>
+    <body>
+        <header class="clearfix">
+            <div class="container">
+                <a id="logo" href="/">Приложение Koa.js</a>
+                <ul class="social-icons">
+                    <li><a href="/login" class="icon flip">Вход</a></li>
+                    <li><a href="/registr" class="icon">Регистрация</a></li>
+                </ul>
+                <nav class="clearfix">
+                    <ul role="navigation">
+                        <li>
+                            <a href="/" class="activePage">Главная</a>
+                        </li>
+                        <li>
+                            <a href="/users">Пользователи</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section role="banner">
+            <hgroup>
+                <h1><%= user.message %></h1>
+
+                <!-- таблица пользователей -->
+            </hgroup>
+            <article role="main" class="clearfix">
+                <div class="post">
+                <h2></h2>
+                <input type="button" onclick="ax()" class="btn btn-success" value="Показать">
+                <div id="app">
+                <div id="divinfo"> {{ info }}</div>
+                    <template>
+                        <el-table
+                            :data="tableData"
+                            style="width: 100%">
+                            <el-table-column
+                                prop="user_id"
+                                label="user_id"
+                                width="180">
+                            </el-table-column>
+                            <el-table-column
+                                prop="user_name"
+                                label="user_name"
+                                width="180">
+                            </el-table-column>
+                        </el-table>
+                    </template>
+                </div>
+                </div>
+            </article>
+        </section> <!-- // banner ends -->
+
+        <footer role="contentinfo">
+            <p>
+                <span class="left">Тестовое задание 5 &copy; - 2019 </span>
+                <a href="/">Главная</a> | <a href="/userlist">Пользователи</a> | <a href="/login">Вход</a> | <a href="/registr">Регистрация</a>
+            </p>
+        </footer>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="scripts/script.js"></script>
+        <script>
+                        function ax() {
+                            axios.get('/userlist')
+                                    .then(function (response) {
+                                        console.log(response.data);
+                                        const User = {
+                                            data() {
+                                                return {
+                                                    tableData: [response.data]
+                                                }
+                                            }
+                                        }
+                                        var Ctor = Vue.extend(User);
+                                        new Ctor().$mount('#app');
+                                    })
+                                    .catch(function (error) {
+                                        console.log(error);
+                                    });
+                        }
+ /*
+            const User = {
+                data() {
+                    return {
+                        tableData: [{
+                                user_id: '1',
+                                user_name: 'Ivanov'
+                            }, {
+                                user_id: '2',
+                                user_name: 'Petrov'
+                            }]
+                    }
+                }
+            }    
+            var Ctor = Vue.extend(User);
+            new Ctor().$mount('#app');
+*/
+        </script>
+        <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
+    </body>
+</html>

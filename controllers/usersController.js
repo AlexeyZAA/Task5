@@ -13,50 +13,22 @@ async function users(ctx) {
 ;
 
 async function userlist(ctx) {
-    const User = {
-    data() {
-        return {
-            tableData: [{
-                    user_id: '1',
-                    user_name: 'Ivanov'
-                }, {
-                    user_id: '2',
-                    user_name: 'Petrov'
-                }]
-        }
-    }
-}
-let tableData = [{
-                    user_id: '1',
-                    user_name: 'Ivanov'
-                }, {
-                    user_id: '2',
-                    user_name: 'Petrov'
-                }];
-    ctx.body = tableData;
+const {Client} = require('pg');
+//параемтры подключения к базе надо вынести в модуль config
+const client = new Client({
+    user: 'root',
+    host: '127.0.0.1',
+    database: 'postgres',
+    password: '1',
+    port:7777
+});
+client.connect();
+let r = await client.query('SELECT * from users');
+let rr = r.rows;
+client.end();
+    ctx.body = JSON.stringify(rr);
 };
 
 module.exports.users = users;
 module.exports.userlist = userlist;
 
-////подключаем модули
-//const views = require('co-views');
-//const parse = require('co-body');
-//const {Client} = require('pg');
-////параемтры подключения к базе надо вынести в модуль config
-//const client = new Client({
-//    user: 'postgres',
-//    host: '127.0.0.1',
-//    database: 'postgres',
-//    password: '1',
-//    port: 5432
-//});
-////получаем данные из базы
-//async function users(ctx) {
-//        client.connect();
-//        let r = await client.query('SELECT * from users');
-//        ctx.body = r.rows;
-//        client.end();
-//    }
-//
-//module.exports.users = users;

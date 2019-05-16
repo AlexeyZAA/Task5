@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
         <link rel="stylesheet" href="assets/css/main.css">
+<style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
         <script src="//unpkg.com/vue/dist/vue.js"></script>
         <script src="//unpkg.com/element-ui@2.8.2/lib/index.js"></script>
     </head>
@@ -41,20 +42,19 @@
                 <div class="post">
                 <h2></h2>
                 <input type="button" onclick="ax()" class="btn btn-success" value="Показать">
-                <div id="app">
-                <div id="divinfo"> {{ info }}</div>
+            <div id="app">
                     <template>
                         <el-table
                             :data="tableData"
                             style="width: 100%">
                             <el-table-column
                                 prop="user_id"
-                                label="user_id"
+                                label="Номер"
                                 width="180">
                             </el-table-column>
                             <el-table-column
                                 prop="user_name"
-                                label="user_name"
+                                label="ФИО"
                                 width="180">
                             </el-table-column>
                         </el-table>
@@ -73,24 +73,25 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="scripts/script.js"></script>
         <script>
-                        function ax() {
-                            axios.get('/userlist')
-                                    .then(function (response) {
-                                        console.log(response.data);
-                                        const User = {
-                                            data() {
-                                                return {
-                                                    tableData: [response.data]
-                                                }
-                                            }
-                                        }
-                                        var Ctor = Vue.extend(User);
-                                        new Ctor().$mount('#app');
-                                    })
-                                    .catch(function (error) {
-                                        console.log(error);
-                                    });
+        function ax() {
+            axios.get('/userlist')
+                    .then(function (response) {
+                        console.log(response.data);
+                        let res = response.data;
+                        const User = {
+                            data() {
+                                return {
+                                    tableData: res
+                                }
+                            }
                         }
+                        var Ctor = Vue.extend(User);
+                        new Ctor().$mount('#app');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+        }
  /*
             const User = {
                 data() {

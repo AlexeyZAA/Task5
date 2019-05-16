@@ -10,6 +10,7 @@ const router = new Router();
 const static = require('koa-static');
 const views = require('koa-views');
 const path = require('path');
+const Vue = require('vue');
 const app = module.exports = new Koa();
 app.use(static(path.join(__dirname, 'public')));
 app.use(views(path.join(__dirname, '/views'), { extension: 'ejs' }));
@@ -22,6 +23,7 @@ router.get('/api1', koaapi.Api.api1);
 router.get('/api2', koaapi.Api.api2);
 router.get('/api3/:parone/:partwo', koaapi.Api.api3);
 router.get('/users', users.users);
+router.get('/userlist', users.userlist);
 //*закончили определять
 //подключаем маршруты к приложению
 app.use(router.routes());

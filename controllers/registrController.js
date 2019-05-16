@@ -7,6 +7,6 @@ const user = {
   message: 'Регистрация'
 };
 async function registr(ctx) {
-  await ctx.render('login', { user });
+  await ctx.render('registr', { user });
 };
 module.exports.registr = registr;

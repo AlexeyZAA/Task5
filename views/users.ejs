@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
         <link rel="stylesheet" href="assets/css/main.css">
-<style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
+        <style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
         <script src="//unpkg.com/vue/dist/vue.js"></script>
         <script src="//unpkg.com/element-ui@2.8.2/lib/index.js"></script>
     </head>
@@ -42,24 +42,24 @@
                 <div class="post">
                 <h2></h2>
                 <input type="button" onclick="ax()" class="btn btn-success" value="Показать">
-            <div id="app">
-                    <template>
-                        <el-table
-                            :data="tableData"
-                            style="width: 100%">
-                            <el-table-column
-                                prop="user_id"
-                                label="Номер"
-                                width="180">
-                            </el-table-column>
-                            <el-table-column
-                                prop="user_name"
-                                label="ФИО"
-                                width="180">
-                            </el-table-column>
-                        </el-table>
-                    </template>
-                </div>
+                    <div id="app">
+                        <template>
+                            <el-table
+                                :data="tableData"
+                                style="width: 100%">
+                                <el-table-column
+                                    prop="user_id"
+                                    label="Номер"
+                                    width="180">
+                                </el-table-column>
+                                <el-table-column
+                                    prop="user_name"
+                                    label="ФИО"
+                                    width="180">
+                                </el-table-column>
+                            </el-table>
+                        </template>
+                    </div>
                 </div>
             </article>
         </section> <!-- // banner ends -->
@@ -92,23 +92,6 @@
                         console.log(error);
                     });
         }
- /*
-            const User = {
-                data() {
-                    return {
-                        tableData: [{
-                                user_id: '1',
-                                user_name: 'Ivanov'
-                            }, {
-                                user_id: '2',
-                                user_name: 'Petrov'
-                            }]
-                    }
-                }
-            }    
-            var Ctor = Vue.extend(User);
-            new Ctor().$mount('#app');
-*/
         </script>
         <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
     </body>

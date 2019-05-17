@@ -8,12 +8,13 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
         <link rel="stylesheet" href="assets/css/main.css">
-        <script src="scripts/vue.js"></script>
+        <script src="//unpkg.com/vue/dist/vue.js"></script>
+        <script src="//unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+        <style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
     </head>
     <body>
         <header class="clearfix">
             <div class="container">
-                <h1><%=user.message %></h1>
                 <a id="logo" href="/">Приложение Koa.js</a>
                 <ul class="social-icons">
                     <li><a href="/login" class="icon flip">Вход</a></li>
@@ -33,28 +34,127 @@
         </header>
         <section role="banner">
             <hgroup>
-                <h1>Тут будет приветствие</h1>
-                <div id="hello"> 
-                </div>
+                <h1><%=user.message %></h1>
             </hgroup>
             <article role="main" class="clearfix">
                 <div class="post">
                     <div>
                         <section id='content'>
-                            <p>Содержимое контента?</p>
+                            <h2>Для регистрации на сайте нужно ввести логин и пароль</h2>
+                            <div id="applog">
+                                <el-form :model="registrForm" status-icon :rules="rules" ref="registrForm" label-width="120px" class="demo-ruleForm">
+                                    <el-form-item label="Логин" prop="login">
+                                        <el-input v-model.number="registrForm.login"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Пароль" prop="pass">
+                                        <el-input type="password" v-model="registrForm.pass" autocomplete="off"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Подтвердить" prop="checkPass">
+                                        <el-input type="password" v-model="registrForm.checkPass" autocomplete="off"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" @click="submitForm('registrForm')">Отправить</el-button>
+                                        <el-button @click="resetForm('registrForm')">Сбросить</el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </div>
                         </section>
                     </div>
                 </div>
             </article>
         </section> <!-- // banner ends -->
-   
+
         <footer role="contentinfo">
             <p>
                 <span class="left">Тестовое задание 5 &copy; - 2019 </span>
                 <a href="/">Главная</a> | <a href="/userlist">Пользователи</a> | <a href="/login">Вход</a> | <a href="/registr">Регистрация</a>
             </p>
         </footer>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            var Main = {
+                data() {
+                    var validateLogin = (rule, value, callback) => {
+                        if (!value) {
+                            return callback(new Error('Введите логин'));
+                        } else {
+                            callback();
+                        }
+                    };
+                    var validatePass = (rule, value, callback) => {
+                        if (value === '') {
+                            callback(new Error('Введите пароль'));
+                        } else {
+                            if (this.registrForm.checkPass !== '') {
+                                this.$refs.registrForm.validateField('Пароли сверены');
+                            }
+                            callback();
+                        }
+                    };
+                    var validatePass2 = (rule, value, callback) => {
+                        if (value === '') {
+                            callback(new Error('Введите пароль второй раз'));
+                        } else if (value !== this.registrForm.pass) {
+                            callback(new Error('Пароли не соответствуют.'));
+                        } else {
+                            callback();
+                        }
+                    };
+                    return {
+                        registrForm: {
+                            login: '',
+                            pass: '',
+                            checkPass: ''
+
+                        },
+                        rules: {
+                            login: [
+                                {validator: validateLogin, trigger: 'blur'}
+                            ],
+                            pass: [
+                                {validator: validatePass, trigger: 'blur'}
+                            ],
+                            checkPass: [
+                                {validator: validatePass2, trigger: 'blur'}
+                            ]
+                        }
+                    };
+                },
+                methods: {
+                    submitForm(formName) {
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                let formObj = this.registrForm;
+                                let formVal = {
+                                    login: formObj.login,
+                                    pass: formObj.pass
+                                }
+                                axios
+                                        .get('/registrform', {
+                                        params: {
+                                                name: 'ssss'
+                                            }
+                                         })
+                                        .then(function (response) {
+                                            console.log(response.data);
+                                        })
+                                        .catch(function (error) {
+                                            console.log(error);
+                                        });
+                            } else {
+                                console.log('error submit!!');
+                                return false;
+                            }
+                        });
+                    },
+                    resetForm(formName) {
+                        this.$refs[formName].resetFields();
+                    }
+                }
+            }
+            var Ctor = Vue.extend(Main);
+            new Ctor().$mount('#applog');
+        </script>
         <script src="scripts/script.js"></script>
-        <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
     </body>
 </html>

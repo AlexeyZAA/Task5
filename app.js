@@ -11,7 +11,11 @@ const static = require('koa-static');
 const views = require('koa-views');
 const path = require('path');
 const Vue = require('vue');
+const ex = require('express')();
+const bodyParser = require('body-parser');
+const koaBody = require('koa-body');
 const app = module.exports = new Koa();
+
 app.use(static(path.join(__dirname, 'public')));
 app.use(views(path.join(__dirname, '/views'), { extension: 'ejs' }));
 
@@ -19,7 +23,8 @@ app.use(views(path.join(__dirname, '/views'), { extension: 'ejs' }));
 router.get('/', site.index);
 router.get('/login', login.login);
 router.get('/registr', registr.registr);
-router.get('/registrform', registr.registrForm);
+router.post('/registrform', koaBody({ multipart: true }), registr.registrForm);
+
 router.get('/api1', koaapi.Api.api1);
 router.get('/api2', koaapi.Api.api2);
 router.get('/api3/:parone/:partwo', koaapi.Api.api3);

@@ -8,9 +8,11 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
         <link rel="stylesheet" href="assets/css/main.css">
+
         <script src="//unpkg.com/vue/dist/vue.js"></script>
         <script src="//unpkg.com/element-ui@2.8.2/lib/index.js"></script>
         <style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
+
     </head>
     <body>
         <header class="clearfix">
@@ -42,12 +44,12 @@
                         <section id='content'>
                             <h2>Для регистрации на сайте нужно ввести логин и пароль</h2>
                             <div id="applog">
-                                <el-form :model="registrForm" status-icon :rules="rules" ref="registrForm" label-width="120px" class="demo-ruleForm">
+                                <el-form :model="registrForm" id="formreg" status-icon :rules="rules" ref="registrForm" label-width="120px" class="demo-ruleForm" >
                                     <el-form-item label="Логин" prop="login">
-                                        <el-input v-model.number="registrForm.login"></el-input>
+                                        <el-input id="login" v-model.number="registrForm.login" ></el-input>
                                     </el-form-item>
                                     <el-form-item label="Пароль" prop="pass">
-                                        <el-input type="password" v-model="registrForm.pass" autocomplete="off"></el-input>
+                                        <el-input type="password" id="uerrpass" v-model="registrForm.pass" autocomplete="off"></el-input>
                                     </el-form-item>
                                     <el-form-item label="Подтвердить" prop="checkPass">
                                         <el-input type="password" v-model="registrForm.checkPass" autocomplete="off"></el-input>
@@ -57,7 +59,14 @@
                                         <el-button @click="resetForm('registrForm')">Сбросить</el-button>
                                     </el-form-item>
                                 </el-form>
-                            </div>
+                            </div>                          
+
+                            <!--form method="POST" id="formreg">
+                                <input type="text" name="user_name" />
+                                <input type="pass" name="user_pass"/>
+                                <input type="button" value="Send" id="sub"/>
+                            </form-->
+
                         </section>
                     </div>
                 </div>
@@ -71,6 +80,7 @@
             </p>
         </footer>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
         <script>
             var Main = {
                 data() {
@@ -124,23 +134,8 @@
                     submitForm(formName) {
                         this.$refs[formName].validate((valid) => {
                             if (valid) {
-                                let formObj = this.registrForm;
-                                let formVal = {
-                                    login: formObj.login,
-                                    pass: formObj.pass
-                                }
-                                axios
-                                        .get('/registrform', {
-                                        params: {
-                                                name: 'ssss'
-                                            }
-                                         })
-                                        .then(function (response) {
-                                            console.log(response.data);
-                                        })
-                                        .catch(function (error) {
-                                            console.log(error);
-                                        });
+                                let form = [{login: this.registrForm.login, pass: this.registrForm.pass}];
+                                registrForm(form);
                             } else {
                                 console.log('error submit!!');
                                 return false;
@@ -154,6 +149,28 @@
             }
             var Ctor = Vue.extend(Main);
             new Ctor().$mount('#applog');
+
+
+            function registrForm(val) {
+                $.ajax({
+                    contentType: false,
+                    data: JSON.stringify(val),
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    //success: result => $('#result').text(result),
+                    type: 'POST',
+                    url: '/registrform',
+                    success: function (response) { //Данные отправлены успешно
+                        alert(response);
+                        console.log(response);
+                        //$('#result_form').html('Имя: '+result.name+'<br>Телефон: '+result.phonenumber);
+                    },
+                    error: function (response) {
+                        alert('Ошибка на сервере');
+                        //$('#result_form').html('Ошибка. Данные не отправлены.');
+                    }
+                })
+            }
         </script>
         <script src="scripts/script.js"></script>
     </body>

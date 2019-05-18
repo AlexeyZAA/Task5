@@ -16,11 +16,11 @@ async function userlist(ctx) {
 const {Client} = require('pg');
 //параемтры подключения к базе надо вынести в модуль config
 const client = new Client({
-    user: 'postgres',
+    user: 'root',
     host: '127.0.0.1',
     database: 'postgres',
     password: '1',
-    port:5432
+    port:7777
 });
 client.connect();
 let r = await client.query('SELECT * from users');

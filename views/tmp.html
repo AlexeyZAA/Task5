@@ -8,11 +8,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
         <link rel="stylesheet" href="assets/css/main.css">
-
+        <style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
         <script src="//unpkg.com/vue/dist/vue.js"></script>
         <script src="//unpkg.com/element-ui@2.8.2/lib/index.js"></script>
-        <style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
-
     </head>
     <body>
         <header class="clearfix">
@@ -36,38 +34,31 @@
         </header>
         <section role="banner">
             <hgroup>
-                <h1><%=user.message %></h1>
+                <h1><%= user.message %></h1>
+
+                <!-- таблица пользователей -->
             </hgroup>
             <article role="main" class="clearfix">
                 <div class="post">
-                    <div>
-                        <section id='content'>
-                            <h2>Для регистрации на сайте нужно ввести логин и пароль</h2>
-                            <div id="applog">
-                                <el-form :model="registrForm" id="formreg" status-icon :rules="rules" ref="registrForm" label-width="120px" class="demo-ruleForm" >
-                                    <el-form-item label="Логин" prop="login">
-                                        <el-input id="login" v-model.number="registrForm.login" ></el-input>
-                                    </el-form-item>
-                                    <el-form-item label="Пароль" prop="pass">
-                                        <el-input type="password" id="uerrpass" v-model="registrForm.pass" autocomplete="off"></el-input>
-                                    </el-form-item>
-                                    <el-form-item label="Подтвердить" prop="checkPass">
-                                        <el-input type="password" v-model="registrForm.checkPass" autocomplete="off"></el-input>
-                                    </el-form-item>
-                                    <el-form-item>
-                                        <el-button type="primary" @click="submitForm('registrForm')">Отправить</el-button>
-                                        <el-button @click="resetForm('registrForm')">Сбросить</el-button>
-                                    </el-form-item>
-                                </el-form>
-                            </div>                          
-
-                            <!--form method="POST" id="formreg">
-                                <input type="text" name="user_name" />
-                                <input type="pass" name="user_pass"/>
-                                <input type="button" value="Send" id="sub"/>
-                            </form-->
-
-                        </section>
+                <h2></h2>
+                <input type="button" onclick="ax()" class="btn btn-success" value="Показать">
+                    <div id="app">
+                        <template>
+                            <el-table
+                                :data="tableData"
+                                style="width: 100%">
+                                <el-table-column
+                                    prop="user_id"
+                                    label="Номер"
+                                    width="180">
+                                </el-table-column>
+                                <el-table-column
+                                    prop="user_name"
+                                    label="ФИО"
+                                    width="180">
+                                </el-table-column>
+                            </el-table>
+                        </template>
                     </div>
                 </div>
             </article>
@@ -80,98 +71,30 @@
             </p>
         </footer>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-        <script>
-            var Main = {
-                data() {
-                    var validateLogin = (rule, value, callback) => {
-                        if (!value) {
-                            return callback(new Error('Введите логин'));
-                        } else {
-                            callback();
-                        }
-                    };
-                    var validatePass = (rule, value, callback) => {
-                        if (value === '') {
-                            callback(new Error('Введите пароль'));
-                        } else {
-                            if (this.registrForm.checkPass !== '') {
-                                this.$refs.registrForm.validateField('Пароли сверены');
-                            }
-                            callback();
-                        }
-                    };
-                    var validatePass2 = (rule, value, callback) => {
-                        if (value === '') {
-                            callback(new Error('Введите пароль второй раз'));
-                        } else if (value !== this.registrForm.pass) {
-                            callback(new Error('Пароли не соответствуют.'));
-                        } else {
-                            callback();
-                        }
-                    };
-                    return {
-                        registrForm: {
-                            login: '',
-                            pass: '',
-                            checkPass: ''
-
-                        },
-                        rules: {
-                            login: [
-                                {validator: validateLogin, trigger: 'blur'}
-                            ],
-                            pass: [
-                                {validator: validatePass, trigger: 'blur'}
-                            ],
-                            checkPass: [
-                                {validator: validatePass2, trigger: 'blur'}
-                            ]
-                        }
-                    };
-                },
-                methods: {
-                    submitForm(formName) {
-                        this.$refs[formName].validate((valid) => {
-                            if (valid) {
-                                let form = [{login: this.registrForm.login, pass: this.registrForm.pass}];
-                                registrForm(form);
-                            } else {
-                                console.log('error submit!!');
-                                return false;
-                            }
-                        });
-                    },
-                    resetForm(formName) {
-                        this.$refs[formName].resetFields();
-                    }
-                }
-            }
-            var Ctor = Vue.extend(Main);
-            new Ctor().$mount('#applog');
-
-
-            function registrForm(val) {
-                $.ajax({
-                    contentType: false,
-                    data: JSON.stringify(val),
-                    enctype: 'multipart/form-data',
-                    processData: false,
-                    //success: result => $('#result').text(result),
-                    type: 'POST',
-                    url: '/registrform',
-                    success: function (response) { //Данные отправлены успешно
-                        alert(response);
-                        console.log(response);
-                        //$('#result_form').html('Имя: '+result.name+'<br>Телефон: '+result.phonenumber);
-                    },
-                    error: function (response) {
-                        alert('Ошибка на сервере');
-                        //$('#result_form').html('Ошибка. Данные не отправлены.');
-                    }
-                })
-            }
-        </script>
         <script src="scripts/script.js"></script>
+        <script>
+        //function ax() {
+        $( document ).ready(function() {
+            axios.get('/userlist')
+                    .then(function (response) {
+                        console.log(response.data);
+                        let res = response.data;
+                        const User = {
+                            data() {
+                                return {
+                                    tableData: res
+                                }
+                            }
+                        }
+                        var Ctor = Vue.extend(User);
+                        new Ctor().$mount('#app');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                });
+        //}
+        </script>
+        <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
     </body>
 </html>

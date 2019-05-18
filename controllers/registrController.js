@@ -29,23 +29,23 @@ async function registrForm(ctx, next) {
         port: 7777
     });
     client.connect();
-    let validlogin = 'SELECT * from users where user_name = $1';
-    client.query(validlogin, [login], function (err, result) {
-        if (result.rowCount > 0) {
-            console.log('Уже есть');
-            //return;
-        } else {
-            console.log('Еще нет');
-            let queryText = 'INSERT INTO users(user_name, user_pass) VALUES($1, $2)';
-            client.query(queryText, [login, pass], function (err, result) {
-                if (err) {
-                    console.log(err + ' - Данные не добавлены');
-                    return;
-                }
-            });
-        }
-    });
-    ctx.body = 'Готово';    
+    let resp;
+    let log = await client.query('SELECT * from users where user_name = $1', [login]);
+    if (log.rowCount > 0) {
+        console.log('Уже есть');
+        resp = 'Уже есть в базе';
+    } else {
+        console.log('Еще нет');
+        let queryText = 'INSERT INTO users(user_name, user_pass) VALUES($1, $2)';
+        client.query(queryText, [login, pass], function (err, result) {
+            if (err) {
+                console.log(err + ' - Данные не добавлены');
+                return;
+            }
+        });
+        resp = 'Юзер зареган';
+    }
+    ctx.body = resp;
 }
 module.exports.registr = registr;
 module.exports.registrForm = registrForm;

@@ -8,14 +8,18 @@ ex.set("view engine", "ejs");
 const user = {
     message: 'Учетные данные'
 };
+//функция для отрисовки шаблона
 async function login(ctx) {
     await ctx.render('login', {user});
 }
 ;
+//функция для обработки пост запроса
 async function loginForm(ctx, next) {
     let res = JSON.parse(ctx.request.body);
+    //получаем данные логина и пароля из формы
     let login = res[0].login;
     let passS = res[0].pass;
+    //хешируем пароль
     let pass = crypto.createHash('sha256').update(passS).digest('base64');
     const {Client} = require('pg');
 //параемтры подключения к базе надо вынести в модуль config
@@ -28,15 +32,16 @@ async function loginForm(ctx, next) {
     });
     client.connect();
     let resp;
+    //проверяем есть ли логин в базе
     let log = await client.query('SELECT * from users where user_name = $1', [login]);
     if (log.rowCount > 0) {
+        //если есть берем пароль и сравниваем пришедший с пасс из базы
         let pass_bd = log.rows[0].user_pass;
         if (pass === pass_bd.toString()) {
+            //если логин есть и пароль правильный авторизируем
             resp = 'Пользователь указан верно, дальше проходит авторизация на сайте';
-            //console.log(pass.toString() + '-'+ pass_bd.toString());
         } else {
             resp = 'Неверно указан логин или пароль';
-            //.log(resp);
         }
     } else {
         resp = 'Неверно указан логин или пароль';

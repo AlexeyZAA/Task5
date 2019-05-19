@@ -24,7 +24,7 @@ router.get('/', site.index);
 router.get('/login', login.login);
 router.get('/registr', registr.registr);
 router.post('/registrform', koaBody({ multipart: true }), registr.registrForm);
-
+router.post('/loginform', koaBody({ multipart: true }), login.loginForm);
 router.get('/api1', koaapi.Api.api1);
 router.get('/api2', koaapi.Api.api2);
 router.get('/api3/:parone/:partwo', koaapi.Api.api3);

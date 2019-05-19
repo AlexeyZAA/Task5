@@ -7,10 +7,10 @@
         <link href='http://fonts.googleapis.com/css?family=Junge' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/fonts/raphaelicons.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/main.css">
-
-        <script src="scripts/vue.js"></script>
+        <script src="//unpkg.com/vue/dist/vue.js"></script>
+        <script src="//unpkg.com/element-ui@2.8.2/lib/index.js"></script>
+        <style>@import url("//unpkg.com/element-ui@2.8.2/lib/theme-chalk/index.css");</style>
     </head>
     <body>
         <header class="clearfix">
@@ -40,102 +40,109 @@
                 </div>
             </hgroup>
             <article role="main" class="clearfix">
-            <div class="contaner">
-                <div class="row">
-                <div class="col-md-4 col-xs-4">
                 <div class="post">
-                    <h2>Тестовое приложение базового функционала. </h2>
-В приведенном ниже примере страницы HTML выполняется создание встроенного проигрывателя, который будет загружать видео, воспроизводить его в течение 6 секунд и останавливать воспроизведение. Подробное описание комментариев в коде HTML приведено в списке после примера.
-                </div>
-                </div>
-                <div class="col-md-8 col-xs-8">
-                   <div id="player"></div>
-                </div>
+                    <div>
+                        <section id='content'>
+                            <div id="applog">
+                                <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="120px" class="demo-ruleForm">
+                                    <el-form-item label="Логин" prop="login">
+                                        <el-input v-model="loginForm.login" autocomplete="off"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="Пароль" prop="pass">
+                                        <el-input v-model="loginForm.pass" autocomplete="off"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <el-button type="primary" @click="submitForm('loginForm')">Войти</el-button>
+                                        <el-button @click="resetForm('loginForm')">Сбросить</el-button>
+                                    </el-form-item>
+                                </el-form>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </article>
         </section> <!-- // banner ends -->
-        <section class="container">
-            <div class="columns">
-                <article>
-                    <figure>
-                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor...">
-                        <figcaption>
-                            <h3>Micro-formatted HTML5</h3>
-                            <p>Pellentesque mi arcu, sollicitudin vel malesu, <a href="#">volutpat vitae nisi.</a> Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
-                        </figcaption>
-                    </figure>
-                </article>
-                <article>
-                    <figure>
-                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor..." class="alt-col">
-                        <figcaption>
-                            <h3>Responsive</h3>
-                            <p>Pellentesque mi arcu, sollicitudin vel malesu, volutpat vitae nisi. Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
-                        </figcaption>
-                    </figure>
-                </article>
-                <article>
-                    <figure>
-                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor...">
-                        <figcaption>
-                            <h3>Pure CSS3</h3>
-                            <p>Pellentesque mi arcu, sollicitudin vel malesu, <strong>volutpat vitae nisi. Nulla luctus</strong> lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
-                        </figcaption>
-                    </figure>
-                </article>
-                <article>
-                    <figure>
-                        <img src="assets/images/1.jpg" alt="Lorem ipsum dolor..." class="alt-col">
-                        <figcaption>
-                            <h3>Browser compatible</h3>
-                            <p>Pellentesque mi arcu, sollicitudin vel malesu, volutpat vitae nisi. Nulla luctus lacus at tortor blandit semper. Donec gravida aliquet urna, eu pulvinar ligula pellentesque ornare. <a href="#" class="more-link">Read more &rarr;</a></p>
-                        </figcaption>
-                    </figure>
-                </article>
-            </div> 
-        </section>
+
         <footer role="contentinfo">
             <p>
                 <span class="left">Тестовое задание 5 &copy; - 2019 </span>
                 <a href="/">Главная</a> | <a href="/userlist">Пользователи</a> | <a href="/login">Вход</a> | <a href="/registr">Регистрация</a>
             </p>
         </footer>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+        <script>
+            var MainLogin = {
+                data() {
+                    var validateLogin = (rule, value, callback) => {
+                        if (!value) {
+                            return callback(new Error('Введите логин'));
+                        } else {
+                            callback();
+                        }
+                    };
+                    var validatePass = (rule, value, callback) => {
+                        if (value === '') {
+                            callback(new Error('Введите пароль'));
+                        } else {
+                            callback();
+                        }
+                    };
+                    return {
+                        loginForm: {
+                            login: '',
+                            pass: ''
+                        },
+                        rules: {
+                            login: [
+                                {validator: validateLogin, trigger: 'blur'}
+                            ],
+                            pass: [
+                                {validator: validatePass, trigger: 'blur'}
+                            ]
+                        }
+                    };
+                },
+                methods: {
+                    submitForm(formName) {
+                        this.$refs[formName].validate((valid) => {
+                            if (valid) {
+                                let form = [{login: this.loginForm.login, pass: this.loginForm.pass}];
+                                loginF(form);
+                            } else {
+                                console.log('Ошибка отправки!!');
+                                return false;
+                            }
+                        });
+                    },
+                    resetForm(formName) {
+                        this.$refs[formName].resetFields();
+                    }
+                }
+            }
+            var Ctor = Vue.extend(MainLogin);
+            new Ctor().$mount('#applog');
+
+            function loginF(val) {
+                $.ajax({
+                    contentType: false,
+                    data: JSON.stringify(val),
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    //success: result => $('#result').text(result),
+                    type: 'POST',
+                    url: '/loginform',
+                    success: function (response) { //Данные отправлены успешно
+                        alert(response);
+                        console.log(response);
+                        //$('#result_form').html('Имя: '+result.name+'<br>Телефон: '+result.phonenumber);
+                    },
+                    error: function (response) {
+                        alert('Ошибка на сервере');
+                        //$('#result_form').html('Ошибка. Данные не отправлены.');
+                    }
+                })
+            }
+        </script>
         <script src="scripts/script.js"></script>
-<script>
-      var tag = document.createElement('script');
-
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '360',
-          width: '640',
-          videoId: 'M7lc1UVf-VE',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-      }
-
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
-
-      var done = false;
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
-        }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
-    </script>
-        <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script-->
     </body>
 </html>

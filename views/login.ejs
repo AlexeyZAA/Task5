@@ -15,7 +15,6 @@
     <body>
         <header class="clearfix">
             <div class="container">
-                <h1><%=user.message %></h1>
                 <a id="logo" href="/">Приложение Koa.js</a>
                 <ul class="social-icons">
                     <li><a href="/login" class="icon flip">Вход</a></li>
@@ -35,7 +34,7 @@
         </header>
         <section role="banner">
             <hgroup>
-                <h1>Тут будет приветствие</h1>
+                <h1><%=user.message %></h1>
                 <div id="hello"> 
                 </div>
             </hgroup>
@@ -44,16 +43,16 @@
                     <div>
                         <section id='content'>
                             <div id="applog">
-                                <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                                    <el-form-item label="Password" prop="pass">
-                                        <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                                <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="120px" class="demo-ruleForm">
+                                    <el-form-item label="Логин" prop="login">
+                                        <el-input v-model="loginForm.login" autocomplete="off"></el-input>
                                     </el-form-item>
-                                    <el-form-item label="Confirm" prop="checkPass">
-                                        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+                                    <el-form-item label="Пароль" prop="pass">
+                                        <el-input type="password" v-model="loginForm.pass" autocomplete="off"></el-input>
                                     </el-form-item>
                                     <el-form-item>
-                                        <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-                                        <el-button @click="resetForm('ruleForm')">Reset</el-button>
+                                        <el-button type="primary" @click="submitForm('loginForm')">Войти</el-button>
+                                        <el-button @click="resetForm('loginForm')">Сбросить</el-button>
                                     </el-form-item>
                                 </el-form>
                             </div>
@@ -69,40 +68,35 @@
                 <a href="/">Главная</a> | <a href="/userlist">Пользователи</a> | <a href="/login">Вход</a> | <a href="/registr">Регистрация</a>
             </p>
         </footer>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
         <script>
-            var Main = {
+            var MainLogin = {
                 data() {
-                    var validatePass = (rule, value, callback) => {
-                        if (value === '') {
-                            callback(new Error('Введите пароль'));
+                    var validateLogin = (rule, value, callback) => {
+                        if (!value) {
+                            return callback(new Error('Введите логин'));
                         } else {
-                            if (this.ruleForm.checkPass !== '') {
-                                this.$refs.ruleForm.validateField('checkPass');
-                            }
                             callback();
                         }
                     };
-                    var validatePass2 = (rule, value, callback) => {
+                    var validatePass = (rule, value, callback) => {
                         if (value === '') {
-                            callback(new Error('Введите пароль второй раз'));
-                        } else if (value !== this.ruleForm.pass) {
-                            callback(new Error('Two inputs don\'t match!'));
+                            callback(new Error('Введите пароль'));
                         } else {
                             callback();
                         }
                     };
                     return {
-                        ruleForm: {
-                            pass: '',
-                            checkPass: '',
-                            age: ''
+                        loginForm: {
+                            login: '',
+                            pass: ''
                         },
                         rules: {
+                            login: [
+                                {validator: validateLogin, trigger: 'blur'}
+                            ],
                             pass: [
                                 {validator: validatePass, trigger: 'blur'}
-                            ],
-                            checkPass: [
-                                {validator: validatePass2, trigger: 'blur'}
                             ]
                         }
                     };
@@ -111,9 +105,10 @@
                     submitForm(formName) {
                         this.$refs[formName].validate((valid) => {
                             if (valid) {
-                                alert('submit!');
+                                let form = [{login: this.loginForm.login, pass: this.loginForm.pass}];
+                                loginF(form);
                             } else {
-                                console.log('error submit!!');
+                                console.log('Ошибка отправки!!');
                                 return false;
                             }
                         });
@@ -123,8 +118,27 @@
                     }
                 }
             }
-            var Ctor = Vue.extend(Main);
+            var Ctor = Vue.extend(MainLogin);
             new Ctor().$mount('#applog');
+
+            function loginF(val) {
+                $.ajax({
+                    contentType: false,
+                    data: JSON.stringify(val),
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    //success: result => $('#result').text(result),
+                    type: 'POST',
+                    url: '/loginform',
+                    success: function (response) { //Данные отправлены успешно
+                        alert(response);
+                        console.log(response);
+                    },
+                    error: function (response) {
+                        alert('Ошибка на сервере');
+                    }
+                })
+            }
         </script>
         <script src="scripts/script.js"></script>
     </body>

@@ -37,7 +37,7 @@ async function registrForm(ctx, next) {
     } else {
         console.log('Еще нет');
         let queryText = 'INSERT INTO users(user_name, user_pass) VALUES($1, $2)';
-        client.query(queryText, [login, pass], function (err, result) {
+        client.query(queryText, [login, pass.toString('Hex')], function (err, result) {
             if (err) {
                 console.log(err + ' - Данные не добавлены');
                 return;

@@ -43,7 +43,7 @@
                     <div>
                         <section id='content'>
                             <h2>Для регистрации на сайте нужно ввести логин и пароль</h2>
-                            <div id="applog">
+                            <div id="appreg">
                                 <el-form :model="registrForm" id="formreg" status-icon :rules="rules" ref="registrForm" label-width="120px" class="demo-ruleForm" >
                                     <el-form-item label="Логин" prop="login">
                                         <el-input id="login" v-model.number="registrForm.login" ></el-input>
@@ -82,7 +82,7 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
         <script>
-            var Main = {
+            var MainReg = {
                 data() {
                     var validateLogin = (rule, value, callback) => {
                         if (!value) {
@@ -137,7 +137,7 @@
                                 let form = [{login: this.registrForm.login, pass: this.registrForm.pass}];
                                 registrForm(form);
                             } else {
-                                console.log('error submit!!');
+                                console.log('Ошибка отправки!!');
                                 return false;
                             }
                         });
@@ -147,8 +147,8 @@
                     }
                 }
             }
-            var Ctor = Vue.extend(Main);
-            new Ctor().$mount('#applog');
+            var Ctor = Vue.extend(MainReg);
+            new Ctor().$mount('#appreg');
 
 
             function registrForm(val) {
@@ -162,7 +162,7 @@
                     url: '/registrform',
                     success: function (response) { //Данные отправлены успешно
                         alert(response);
-                        console.log(response);
+                        //console.log(response);
                         //$('#result_form').html('Имя: '+result.name+'<br>Телефон: '+result.phonenumber);
                     },
                     error: function (response) {
